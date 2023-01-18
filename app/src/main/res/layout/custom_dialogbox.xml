@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DialogFragment">
+
+    <TextView
+        android:id="@+id/tvDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dialog Box"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:layout_marginTop="70dp"/>
+    <EditText
+        android:id="@+id/etMenu"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Enter menu Item"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/etshape"
+        android:layout_marginTop="20dp"/>
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Description"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/etshape"
+        android:layout_marginTop="20dp"/>
+    <Button
+        android:id="@+id/btnAdded"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="200dp"
+        android:text="Add"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:background="@drawable/etshape"
+        android:layout_marginTop="20dp"/>
+
+
+
+</LinearLayout>
