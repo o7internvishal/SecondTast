@@ -1,10 +1,8 @@
 package com.example.secondtast.view
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -19,12 +17,14 @@ class UserAdapter( val userList: ArrayList<UserData>,var clickInterface: ClickIn
  var name:TextView
  var mbNum:TextView
  var mMenus:ImageButton
+ var mdlt:ImageButton
 //        var name=v.findViewById<TextView>(R.id.tvItem)
 //        var mbNum=v.findViewById<TextView>(R.id.tvDescription)
         init {
     name = v.findViewById<TextView>(R.id.tvItem)
     mbNum = v.findViewById<TextView>(R.id.tvDescription)
      mMenus = v.findViewById<ImageButton>(R.id.imgplus)
+    mdlt=v.findViewById<ImageButton>(R.id.imdlt)
 
 }
 
@@ -48,7 +48,11 @@ class UserAdapter( val userList: ArrayList<UserData>,var clickInterface: ClickIn
         holder.mbNum.text=newList.userMb
         holder.mMenus.setOnClickListener {
 
-            clickInterface.editClicked(newList)
+            clickInterface.editClicked(position)
+        }
+        holder.mdlt.setOnClickListener {
+
+            clickInterface.deleteClicked(position)
         }
     }
 
