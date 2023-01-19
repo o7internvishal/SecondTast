@@ -28,6 +28,7 @@ class UserAdapter(var userList: ArrayList<UserData>, var clickInterface: ClickIn
 
 
 
+
     }
     fun setFilteredList(userList: ArrayList<UserData>){
         this.userList=userList

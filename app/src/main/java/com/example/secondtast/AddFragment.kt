@@ -95,7 +95,7 @@ class AddFragment : Fragment(), ClickInterface {
                 val item = etItem.text.toString()
                 val des = etDescription.text.toString()
                 Toast.makeText(mainActivity, "Add Data", Toast.LENGTH_SHORT).show()
-                userList.add(UserData("Name:$item", "Description:$des"))
+                userList.add(UserData(item, des))
                 userAdapter.notifyDataSetChanged()
                 dialog.dismiss()
 
@@ -152,8 +152,7 @@ class AddFragment : Fragment(), ClickInterface {
             }
     }
 
-    override fun editClicked(userData: Int) {
-
+    override fun editClicked(position: Int) {
         val inflater = LayoutInflater.from(mainActivity)
         val v = inflater.inflate(R.layout.custom_dialogbox, null)
         val addDialog = AlertDialog.Builder(mainActivity)
@@ -161,11 +160,13 @@ class AddFragment : Fragment(), ClickInterface {
         addDialog.setView(v)
         etItem = v.findViewById(R.id.etMenu)
         etDescription = v.findViewById(R.id.etDescription)
-        addDialog.setPositiveButton("Add") { dialog, _ ->
+        etItem.setText(userList[position].userName)
+        etDescription.setText(userList[position].userMb)
+        addDialog.setPositiveButton("update") { dialog, _ ->
             val item = etItem.text.toString()
             val des = etDescription.text.toString()
             Toast.makeText(mainActivity, "Update", Toast.LENGTH_SHORT).show()
-            userList.add(UserData("Name:$item", "Description:$des"))
+            userList.set(position,UserData(item, des))
             userAdapter.notifyDataSetChanged()
             dialog.dismiss()
 
