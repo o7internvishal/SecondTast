@@ -10,7 +10,7 @@ import com.example.secondtast.ClickInterface
 import com.example.secondtast.R
 import com.example.secondtast.model.UserData
 
-class UserAdapter( val userList: ArrayList<UserData>,var clickInterface: ClickInterface):RecyclerView.Adapter<UserAdapter.UserViewHolder>()
+class UserAdapter(var userList: ArrayList<UserData>, var clickInterface: ClickInterface):RecyclerView.Adapter<UserAdapter.UserViewHolder>()
 //
 {
     inner class UserViewHolder(val v:View): RecyclerView.ViewHolder(v){
@@ -18,8 +18,6 @@ class UserAdapter( val userList: ArrayList<UserData>,var clickInterface: ClickIn
  var mbNum:TextView
  var mMenus:ImageButton
  var mdlt:ImageButton
-//        var name=v.findViewById<TextView>(R.id.tvItem)
-//        var mbNum=v.findViewById<TextView>(R.id.tvDescription)
         init {
     name = v.findViewById<TextView>(R.id.tvItem)
     mbNum = v.findViewById<TextView>(R.id.tvDescription)
@@ -30,6 +28,10 @@ class UserAdapter( val userList: ArrayList<UserData>,var clickInterface: ClickIn
 
 
 
+    }
+    fun setFilteredList(userList: ArrayList<UserData>){
+        this.userList=userList
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {

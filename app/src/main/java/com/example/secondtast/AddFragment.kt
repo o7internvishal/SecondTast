@@ -7,14 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.secondtast.model.UserData
 import com.example.secondtast.view.UserAdapter
 import java.util.Locale
+import java.util.Locale.filter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,13 +31,13 @@ class AddFragment : Fragment(), ClickInterface {
 
     lateinit var recyclerView: RecyclerView
     var userList = ArrayList<UserData>()
-    var displayUserList = ArrayList<UserData>()
+    var filter = ArrayList<UserData>()
 
     lateinit var userAdapter: UserAdapter
 
     lateinit var etItem: EditText
     lateinit var etDescription: EditText
-    lateinit var search:SearchView
+    lateinit var search: SearchView
 
 
     lateinit var addButton: Button
@@ -64,31 +65,24 @@ class AddFragment : Fragment(), ClickInterface {
         val view = inflater.inflate(R.layout.fragment_add, container, false)
         recyclerView = view.findViewById(R.id.recyclerView)
         val button = view.findViewById<Button>(R.id.btAdd)
-        search=view.findViewById<SearchView>(R.id.search)
+         search = view.findViewById(R.id.search)
         userAdapter = UserAdapter(userList, this)
 
         recyclerView.layoutManager = LinearLayoutManager(mainActivity)
         recyclerView.adapter = userAdapter
-        search.setOnQueryTextListener(object: OnQueryTextListener, SearchView.OnQueryTextListener {
+
+        search.setOnQueryTextListener(object : OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
-//                search.clearFocus()
 
-                    return false
-                }
-
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-
-
-
-
-                return false
+                return true
             }
 
+            override fun onQueryTextChange(query: String?): Boolean {
+                filterList(query)
+                return true
+
+            }
         })
-
-
-
         button.setOnClickListener {
             val inflater = LayoutInflater.from(mainActivity)
             val v = inflater.inflate(R.layout.custom_dialogbox, null)
@@ -115,23 +109,27 @@ class AddFragment : Fragment(), ClickInterface {
             addDialog.show()
 
 
-
         }
 
         return view
     }
 
-    private fun filterList(query: String?) {
-        if (query!=null){
-            val filteredList=ArrayList<SearchView>()
 
+    private fun filterList(query: String?) {
+        if (query != null) {
+            filter = ArrayList<UserData>()
             for (i in userList)
-                if (i.userName.contains(query)){
-                    displayUserList.add(i)
+                if (i.userName.contains(query)) {
+                    filter.add(i)
                 }
         }
+        if (filter.isEmpty()) {
+            Toast.makeText(mainActivity, "No Data Found", Toast.LENGTH_SHORT).show()
+        } else {
+            System.out.println(filter)
+            userAdapter.setFilteredList(filter)
 
-
+        }
     }
 
     companion object {
